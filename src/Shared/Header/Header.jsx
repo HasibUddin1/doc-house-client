@@ -1,14 +1,22 @@
 import { Link } from "react-router-dom";
 import { FaClinicMedical } from 'react-icons/fa';
+import { useSelector } from "react-redux";
 
 
 const Header = () => {
+
+    const { auth } = useSelector(state => state)
+    console.log(auth.user)
 
     const navOptions = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link>About</Link></li>
         <li><Link>Appointment</Link></li>
-        <li><Link to='/login'>Login</Link></li>
+        {auth.user ?
+            <button>Logout</button>
+            :
+            <li><Link to='/login'>Login</Link></li>
+        }
     </>
 
     return (

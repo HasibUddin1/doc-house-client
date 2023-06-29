@@ -1,5 +1,5 @@
 
-import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import app from "../../firebase/firebase.config";
 
 const auth = getAuth(app)
@@ -45,6 +45,17 @@ export const logOut = () => {
         }
         catch (error) {
             console.log(error)
+        }
+    }
+}
+
+export const loggedInUser = () => {
+    return async () => {
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            console.log(currentUser)
+        })
+        return () => {
+            unsubscribe()
         }
     }
 }
