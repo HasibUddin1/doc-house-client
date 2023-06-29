@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 const Header = () => {
 
     const { auth } = useSelector(state => state)
-    console.log(auth.user)
+    console.log(auth)
 
     const navOptions = <>
         <li><Link to='/'>Home</Link></li>

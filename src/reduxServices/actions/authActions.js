@@ -7,13 +7,7 @@ const auth = getAuth(app)
 const googleProvider = new GoogleAuthProvider()
 
 export const googleSignIn = () => {
-    return async () => {
-        try {
-            await signInWithPopup(auth, googleProvider)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    return signInWithPopup(auth, googleProvider)
 }
 
 export const signIn = (email, password) => {
@@ -50,13 +44,11 @@ export const logOut = () => {
 }
 
 export const loggedInUser = () => {
-    return async () => {
-        const unsubscribe = onAuthStateChanged(auth, currentUser => {
-            console.log(currentUser)
-        })
-        return () => {
-            unsubscribe()
-        }
+    const unsubscribe = onAuthStateChanged(auth, currentUser => {
+        console.log(currentUser)
+    })
+    return () => {
+        unsubscribe()
     }
 }
 
